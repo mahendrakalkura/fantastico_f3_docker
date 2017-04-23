@@ -1,0 +1,21 @@
+Requirements
+============
+
+* [Docker](https://www.docker.com/)
+
+How to install?
+===============
+
+```
+$ git clone --recursive git@github.com:netenberg/fantastico_f3_docker.git
+```
+
+How to use?
+===========
+
+```
+$ make reset
+$ make clean
+$ make build
+$ FANTASTICO_F3_CORE=/var/netenberg/fantastico_f3/sources make run
+```
