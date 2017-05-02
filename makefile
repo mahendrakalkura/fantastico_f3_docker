@@ -2,21 +2,18 @@ MAKEFLAGS+=--ignore-errors
 MAKEFLAGS+=--no-print-directory
 SHELL:=/bin/bash
 
-.PHONY: reset
 .PHONY: clean
 .PHONY: build
 .PHONY: run
 
-reset:
-	docker rm --force $$(docker ps --all --quiet)
-	docker ps --all
-	docker rmi --force $$(docker images --all --quiet)
-	docker images --all
-
 clean:
-	docker container prune --force
-	docker image prune --force
-	docker system prune --force
+	/usr/bin/docker rm --force $$(/usr/bin/docker ps --all --quiet)
+	/usr/bin/docker ps --all
+	/usr/bin/docker rmi --force $$(/usr/bin/docker images | /usr/bin/grep "^<none>" | /usr/bin/awk "{print $$3}")
+	/usr/bin/docker images
+	/usr/bin/docker container prune --force
+	/usr/bin/docker image prune --force
+	/usr/bin/docker system prune --force
 
 build:
 	docker build --tag netenberg/fantastico_f3 .
