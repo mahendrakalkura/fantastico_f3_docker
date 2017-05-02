@@ -14,7 +14,6 @@ How to use?
 ===========
 
 ```
-$ make reset
 $ make clean
 $ make build
 $ FANTASTICO_F3_CORE=/var/netenberg/fantastico_f3/sources make run
