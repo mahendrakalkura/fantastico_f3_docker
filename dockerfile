@@ -70,34 +70,12 @@ RUN /usr/bin/apt-get --yes install \
     php5.6-xsl \
     php5.6-zip \
     python3-pip \
+    ssh \
     tmux \
     tree \
     unzip \
     vim \
     wget
-
-RUN /bin/mkdir --parents \
-    /root/public_html \
-    /var/lib/php/sessions \
-    /var/lib/php/sessions/administrators \
-    /var/lib/php/sessions/visitors
-
-RUN /bin/chmod 755 /root /root/public_html
-
-COPY files/etc/apache2/ports.conf /etc/apache2/ports.conf
-COPY files/etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY files/etc/init.d/php5.6-fpm /etc/init.d/php5.6-fpm
-COPY files/etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
-COPY files/etc/php/5.6/fpm/pool.d/www.conf /etc/php/5.6/fpm/pool.d/www.conf
-COPY files/etc/php/5.6/php.ini /etc/php/5.6/apache2/php.ini
-COPY files/etc/php/5.6/php.ini /etc/php/5.6/cgi/php.ini
-COPY files/etc/php/5.6/php.ini /etc/php/5.6/cli/php.ini
-COPY files/etc/php/5.6/php.ini /etc/php/5.6/fpm/php.ini
-COPY files/etc/php/5.6/php.ini /etc/php/5.6/phpdbg/php.ini
-COPY files/root/my.cnf /root/my.cnf
-COPY files/root/run.sh /root/run.sh
-
-RUN /bin/chmod 755 /etc/init.d/php5.6-fpm
 
 RUN /usr/sbin/a2enmod php5.6 proxy proxy_fcgi
 
@@ -128,6 +106,34 @@ RUN /usr/sbin/phpenmod \
     xmlrpc \
     xsl \
     zip
+
+RUN /bin/mkdir --parents \
+    /root/public_html \
+    /var/lib/php/sessions \
+    /var/lib/php/sessions/administrators \
+    /var/lib/php/sessions/visitors
+
+RUN /bin/echo 'root:root' | /usr/sbin/chpasswd
+
+RUN /bin/chmod 755 /root /root/public_html
+
+COPY files/etc/apache2/ports.conf /etc/apache2/ports.conf
+COPY files/etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY files/etc/init.d/php5.6-fpm /etc/init.d/php5.6-fpm
+COPY files/etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY files/etc/php/5.6/fpm/pool.d/www.conf /etc/php/5.6/fpm/pool.d/www.conf
+COPY files/etc/php/5.6/php.ini /etc/php/5.6/apache2/php.ini
+COPY files/etc/php/5.6/php.ini /etc/php/5.6/cgi/php.ini
+COPY files/etc/php/5.6/php.ini /etc/php/5.6/cli/php.ini
+COPY files/etc/php/5.6/php.ini /etc/php/5.6/fpm/php.ini
+COPY files/etc/php/5.6/php.ini /etc/php/5.6/phpdbg/php.ini
+COPY files/etc/ssh/sshd_config /etc/ssh/sshd_config
+COPY files/root/my.cnf /root/my.cnf
+COPY files/root/run.sh /root/run.sh
+
+RUN /bin/chmod 755 /etc/init.d/php5.6-fpm
+
+RUN /usr/bin/touch /etc/development
 
 EXPOSE 80
 
