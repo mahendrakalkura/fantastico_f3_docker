@@ -6,14 +6,13 @@ if [ ! -f /var/lib/mysql/ibdata1 ]; then
     /usr/bin/mysql --user=root --execute="FLUSH PRIVILEGES"
     /etc/init.d/mysql stop
 fi
-if [ ! -d /var/netenberg/fantastico_f3/sources/options ]; then
-    /bin/mkdir --parents /var/netenberg/fantastico_f3/sources/options
-    /bin/echo '/usr/sbin/apache2' > /var/netenberg/fantastico_f3/sources/options/apache.txt
-    /bin/echo '/usr/bin/mysql' > /var/netenberg/fantastico_f3/sources/options/mysql.txt
-    /bin/echo '/usr/bin/php' > /var/netenberg/fantastico_f3/sources/options/php.txt
-    /bin/echo 'root:/root:172.17.0.2:/root/public_html' > /var/netenberg/fantastico_f3/sources/options/users.txt
-fi
+/bin/mkdir --parents /var/netenberg/fantastico_f3/sources/options
+/bin/echo '/usr/sbin/apache2' > /var/netenberg/fantastico_f3/sources/options/apache.txt
+/bin/echo '/usr/bin/mysql' > /var/netenberg/fantastico_f3/sources/options/mysql.txt
+/bin/echo '/usr/bin/php' > /var/netenberg/fantastico_f3/sources/options/php.txt
+/bin/echo 'user:/root:172.17.0.2:/root/public_html' > /var/netenberg/fantastico_f3/sources/options/users.txt
 /etc/init.d/apache2 start
 /etc/init.d/mysql start
 /etc/init.d/php5.6-fpm start
+/etc/init.d/ssh start
 /bin/bash
