@@ -77,7 +77,7 @@ RUN /usr/bin/apt-get --yes install \
     vim \
     wget
 
-RUN /usr/sbin/a2enmod php5.6 proxy proxy_fcgi
+RUN /usr/sbin/a2enmod php5.6 proxy proxy_fcgi rewrite
 
 RUN /usr/sbin/phpenmod \
     bz2 \
@@ -134,10 +134,6 @@ COPY files/root/run.sh /root/run.sh
 RUN /bin/chmod 755 /etc/init.d/php5.6-fpm
 
 RUN /usr/bin/touch /etc/development
-
-RUN /usr/sbin/a2enmod rewrite
-
-RUN /usr/sbin/service apache2 restart
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
