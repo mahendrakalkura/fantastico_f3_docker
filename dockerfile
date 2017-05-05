@@ -135,6 +135,12 @@ RUN /bin/chmod 755 /etc/init.d/php5.6-fpm
 
 RUN /usr/bin/touch /etc/development
 
+RUN /usr/sbin/a2enmod rewrite
+
+RUN /usr/sbin/service apache2 restart
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 EXPOSE 80
 
 ENV HOME /root
