@@ -77,7 +77,7 @@ RUN /usr/bin/apt-get --yes install \
     vim \
     wget
 
-RUN /usr/sbin/a2enmod php5.6 proxy proxy_fcgi
+RUN /usr/sbin/a2enmod php5.6 proxy proxy_fcgi rewrite
 
 RUN /usr/sbin/phpenmod \
     bz2 \
@@ -134,6 +134,8 @@ COPY files/root/run.sh /root/run.sh
 RUN /bin/chmod 755 /etc/init.d/php5.6-fpm
 
 RUN /usr/bin/touch /etc/development
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 EXPOSE 80
 
