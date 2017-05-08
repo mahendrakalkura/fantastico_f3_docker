@@ -135,7 +135,15 @@ RUN /bin/chmod 755 /etc/init.d/php5.6-fpm
 
 RUN /usr/bin/touch /etc/development
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN /usr/bin/curl \
+    --show-error \
+    --silent \
+    https://getcomposer.org/installer \
+    | \
+    /usr/bin/php \
+    -- \
+    --filename=composer \
+    --install-dir=/usr/local/bin
 
 EXPOSE 80
 
