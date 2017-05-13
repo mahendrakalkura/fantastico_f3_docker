@@ -7,7 +7,7 @@ How to install?
 ===============
 
 ```
-$ git clone --recursive git@github.com:netenberg/fantastico_f3_docker.git
+$ git clone --recursive git@github.com:netenberg/fantastico_f3_docker_5.6.git
 ```
 
 How to use?
