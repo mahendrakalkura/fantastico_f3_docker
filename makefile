@@ -16,7 +16,7 @@ clean:
 	/usr/bin/docker system prune --force
 
 build:
-	docker build --tag netenberg/fantastico_f3 .
+	docker build --tag netenberg/fantastico_f3/5.6 .
 
 run:
 	docker run \
@@ -26,4 +26,4 @@ run:
 		--tty \
 		--volume ${FANTASTICO_F3_CORE}:/var/netenberg/fantastico_f3/sources \
 		--volume mysql:/var/lib/mysql \
-		netenberg/fantastico_f3
+		netenberg/fantastico_f3/5.6
